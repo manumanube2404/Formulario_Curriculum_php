@@ -344,3 +344,9 @@ section[role=main] h4 strong {
 }
 
 
+@media print {
+
+    .print-btn {
+        display: none;
+    }
+}
