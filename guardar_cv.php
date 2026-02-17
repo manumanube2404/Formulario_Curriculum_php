@@ -14,11 +14,18 @@ $formacion = $_POST['formacionesHidden'];
 $habilidades = $_POST['habilidadesHidden'];
 $idiomas = $_POST['idiomasHidden'];
 
-//Foto
 $foto = null;
-if (!empty($_FILES['imagen']['name'])) { //comprueba si se ha elegido una foto o no
-    $foto = time() . "_" . $_FILES['imagen']['name']; //Usamo "time" para crear el nombre y asegurar que no haya 2 iguales
-    move_uploaded_file($_FILES['imagen']['tmp_name'],"assets/uploads/" . $foto); //mete la imagen en la carpeta uploads, para guardarla 
+
+if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] === 0) {
+
+    $extension = pathinfo($_FILES['imagen']['name'], PATHINFO_EXTENSION);
+    $foto = uniqid() . "." . $extension;
+
+    $ruta = "assets/uploads/" . $foto;
+
+    if (!move_uploaded_file($_FILES['imagen']['tmp_name'], $ruta)) {
+        $foto = null; // si falla, no guardamos nombre
+    }
 }
 
 //Versiones

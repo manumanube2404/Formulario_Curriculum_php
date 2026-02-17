@@ -17,12 +17,15 @@ $email = $arrayDatos['email'];
 $edad = $arrayDatos['edad'];
 $experiencia = nl2br($arrayDatos['experiencia']); //el nl2br = convierte los \n en <br>
 
-$imagenGuardada = $arrayDatos['foto'] 
-    ? "assets/uploads/" . $arrayDatos['foto'] //si el usuario uso una foto, se muestra esa
-    : "assets/uploads/default.png"; //en caso de que no usara , se mostrara la foto por defecto
+$rutaImagen = "assets/uploads/" . $arrayDatos['foto'];
 
+if (!empty($arrayDatos['foto']) && file_exists($rutaImagen)) {
+    $imagenGuardada = $rutaImagen;
+} else {
+    $imagenGuardada = "assets/uploads/default.png";
+}
 //remplaza las x por espacios vacios
-$arrayDatos['habilidades'] = str_replace("×", "", $arrayDatos['habilidades']); 
+$arrayDatos['habilidades'] = str_replace("×", "", $arrayDatos['habilidades']);
 $arrayDatos['formacion'] = str_replace("×", "", $arrayDatos['formacion']);
 $arrayDatos['idiomas'] = str_replace("×", "", $arrayDatos['idiomas']);
 
@@ -142,6 +145,9 @@ $arrIdiomas = array_filter(array_map('trim', explode(",", $arrayDatos['idiomas']
     </footer>
 
     <div class="print-actions">
+        <a href="index.php" class="btn primary">Crear nuevo CV</a>
+        <a href="lista_versiones.php"><button type="button" class="btn primary">Ver versiones
+                guardadas</button></a>
         <button class="print-btn" onclick="window.print()">Imprimir / PDF</button> <!-- cuando pulsas se abre el modo impresion del navegador para poder descargar el .pdf -->
     </div>
 

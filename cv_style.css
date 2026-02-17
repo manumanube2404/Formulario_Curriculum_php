@@ -317,6 +317,7 @@ section[role=main] h4 strong {
     display: flex;
     align-items: center;
     gap: 10px;
+    width: 100%;
 
     background: #33a4c9;
     color: #ffffff;
@@ -343,8 +344,47 @@ section[role=main] h4 strong {
     transform: translateY(0);
 }
 
+ a{
+    text-decoration: none
+}
+
+.btn.primary {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    background: #33a4c9;
+    color: #ffffff;
+
+    padding: 12px 22px;
+    border-radius: 30px;
+
+    border: none;
+    font: 400 15px oswald, sans-serif;
+    letter-spacing: 0.5px;
+
+    cursor: pointer;
+
+    margin-bottom:10px;
+    
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.35);
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.btn.primary:hover {
+    background: #147393;
+    transform: translateY(-2px);
+}
+
+.print-btn:active {
+    transform: translateY(0);
+}
 
 @media print {
+
+    .btn.primary{
+        display:none;
+    }
 
     .print-btn {
         display: none;

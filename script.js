@@ -1,5 +1,5 @@
 let currentStep = 0;
-const steps = document.querySelectorAll(".step"); 
+const steps = document.querySelectorAll(".step");
 const progressBar = document.getElementById("progressBar");
 const review = document.getElementById("review");
 
@@ -17,25 +17,57 @@ function showStep() { //muestra los steps
 
 }
 
+
+const nombre = document.querySelector('[name="nombre"]');
+const apellido1 = document.querySelector('[name="apellido1"]');
+const apellido2 = document.querySelector('[name="apellido2"]');
+const email = document.querySelector('[name="email"]');
+const edad = document.querySelector('[name="edad"]');
+const formacionInput = document.getElementById('formacionInput');
+const habilidadesInput = document.getElementById('habilidadesInput');
+const idiomasInput = document.getElementById('idiomasInput');
+
+nombre.addEventListener("input", function () {
+  this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ]/g, "");
+});
+
+apellido1.addEventListener("input", function () {
+  this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ]/g, "");
+});
+
+apellido2.addEventListener("input", function () {
+  this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ]/g, "");
+});
+
+formacionInput.addEventListener("input", function () {
+  this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ]/g, "");
+});
+
+habilidadesInput.addEventListener("input", function () {
+  this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ]/g, "");
+});
+
+idiomasInput.addEventListener("input", function () {
+  this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ]/g, "");
+});
+
 //Comprueba que el step cumpla las condiciones
 function validateStep(stepIndex) {
 
   // Step 0 = Datos personales
   if (stepIndex === 0) {
-    const name = document.querySelector('[name="nombre"]');
-    const apellido1 = document.querySelector('[name="apellido1"]');
-    const email = document.querySelector('[name="email"]');
-    const edad = document.querySelector('[name="edad"]');
 
-    if (!name.value.trim() || !apellido1.value.trim() || !email.value.trim() || !edad.value.trim()) { //si los campos no estan completos salta la alerta
+
+    if (!nombre.value.trim() || !apellido1.value.trim() || !email.value.trim() || !edad.value.trim()) { //si los campos no estan completos salta la alerta
       alert("Por favor, rellena todos los campos obligatorios");
       return false;
     }
+
     if (!validarEmail(email.value)) { //si el email es invalido, salta la alerta
       alert("Por favor, Introduzca un correo electronico valido");
       return false;
     }
-    if (edad.value<16 || edad.value>100) { //si la edad es invalida, salta la alerta
+    if (edad.value < 16 || edad.value > 100) { //si la edad es invalida, salta la alerta
       alert("Por favor, Introduzca una edad valida");
       return false;
     }
@@ -109,7 +141,7 @@ function mostrarDatos() { //rellena el mostrar datos del final
     "Idiomas": getListValues("listaIdiomas")
   };
 
-  review.innerHTML = Object.entries(data) .map(([key, value]) =>`<div><strong>${key}:</strong> ${value || "—"}</div>`).join(""); //convierte el objeto en html
+  review.innerHTML = Object.entries(data).map(([key, value]) => `<div><strong>${key}:</strong> ${value || "—"}</div>`).join(""); //convierte el objeto en html
 }
 
 
@@ -126,6 +158,7 @@ function initChips(inputId, chipsContainerId) {
     }
   });
 }
+
 
 //crea los chips
 function createChip(text, container) {
@@ -155,7 +188,7 @@ initChips("idiomasInput", "listaIdiomas");
  * join = une todos separandolos con "," 
  */
 function getListValues(listId) {
-  return [...document.querySelectorAll(`#${listId} li`)].map(li => li.textContent.trim()).join(", "); 
+  return [...document.querySelectorAll(`#${listId} li`)].map(li => li.textContent.trim()).join(", ");
 }
 
 
@@ -165,11 +198,12 @@ function validarEmail(email) {
   return regex.test(email);
 }
 
+
 //guarda los chips antes de enviarlos
 document.querySelector('form').addEventListener('submit', () => {
-    document.getElementById('formacionesHidden').value = getListValues("listaFormacion");
-    document.getElementById('habilidadesHidden').value = getListValues("listaHabilidades");
-    document.getElementById('idiomasHidden').value = getListValues("listaIdiomas");
+  document.getElementById('formacionesHidden').value = getListValues("listaFormacion");
+  document.getElementById('habilidadesHidden').value = getListValues("listaHabilidades");
+  document.getElementById('idiomasHidden').value = getListValues("listaIdiomas");
 });
 
 //carga la foto
@@ -177,17 +211,23 @@ document.querySelector('form').addEventListener('submit', () => {
 const cargar_foto = document.getElementById('cargarFoto');
 const avatar = document.querySelector('.avatar');
 
-cargar_foto.addEventListener('change', function() {
-    const file = this.files[0]; // Tomamos el primer archivo (solo se puede elegir uno, pero viene como array)
-    if (file) { 
-        const reader = new FileReader(); //Api del navegador, que lee archivos
-        reader.onload = function(e) { //( onload = se ejecuta cuadno el archivo esta cargado)
-            avatar.innerHTML = `<img src="${e.target.result}" alt="Preview" style="width:100px; height:100px; object-fit:cover; border-radius:50%;">`; //reescribe el html con la nueva imagen
-        }
-        reader.readAsDataURL(file); //lee el archivo (imagen)
-    } else { //si no selecciono ningun archivo, se edita el html poniendo "No Preview"
-        avatar.innerHTML = "No Preview";
+cargar_foto.addEventListener('change', function () {
+  const file = this.files[0]; // Tomamos el primer archivo (solo se puede elegir uno, pero viene como array)
+  if (file) {
+    const reader = new FileReader(); //Api del navegador, que lee archivos
+    reader.onload = function (e) { //( onload = se ejecuta cuadno el archivo esta cargado)
+      avatar.innerHTML = `<img src="${e.target.result}" alt="Preview" style="width:100px; height:100px; object-fit:cover; border-radius:50%;">`; //reescribe el html con la nueva imagen
     }
+    reader.readAsDataURL(file); //lee el archivo (imagen)
+  } else { //si no selecciono ningun archivo, se edita el html poniendo "No Preview"
+    avatar.innerHTML = "No Preview";
+  }
 });
+
+document.getElementById("formulario").addEventListener("keydown", function (event) {
+  if (event.key === "Enter") {
+    event.preventDefault();
+  }
+})
 
 showStep(); //muestra el primer step
