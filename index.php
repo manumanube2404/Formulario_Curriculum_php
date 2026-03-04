@@ -8,6 +8,7 @@
 </head>
 
 <body>
+    <div class="overlay"></div>
     <!-- Si eiste el id introducido, usara a "update" como el action, en caso de que no exista el id, usara "save" -->
     <form action="<?= isset($arrayDatos['id']) ? 'actualizar_cv.php' : 'guardar_cv.php' ?>" method="POST"
         enctype="multipart/form-data" id="formulario">
@@ -26,27 +27,27 @@
                 <h2>Datos personales</h2>
 
                 <div class="grid">
-                    <div class="field">
+                    <div class="inputBx">
                         <label>Nombre <span style="color:red">*</span></label>
                         <input type="text" name="nombre" maxlength="30" required>
                     </div>
 
-                    <div class="field">
+                    <div class="inputBx">
                         <label>Apellido 1 <span style="color:red">*</span></label>
                         <input type="text" name="apellido1" maxlength="30" required >
                     </div>
 
-                    <div class="field">
+                    <div class="inputBx">
                         <label>Apellido 2</label>
                         <input type="text" name="apellido2" maxlength="30">
                     </div>
 
-                    <div class="field">
+                    <div class="inputBx">
                         <label>Email <span style="color:red">*</span></label>
                         <input type="email" name="email" maxlength="30" required>
                     </div>
 
-                    <div class="field">
+                    <div class="inputBx">
                         <label>Edad <span style="color:red">*</span></label>
                         <input type="number" name="edad" min="16" max="100" required>
                     </div>
@@ -74,14 +75,14 @@
             <section class="step">
                 <h2>Experiencia y formación</h2>
 
-                <div class="field full">
+                <div class="inputBx full">
                     <label>Experiencia laboral <span style="color:red">*</span></label>
                     <textarea name="descripcion" placeholder="Describe tu experiencia laboral" maxlength="300"></textarea>
                 </div>
 
                 <div class="grid">
 
-                    <div class="field">
+                    <div class="inputBx">
                         <label>Formación académica <span style="color:red">*</span></label>
                         <div class="chip-input">
                             <input type="text" id="formacionInput"
@@ -107,7 +108,7 @@
             <section class="step">
                 <h2>Habilidades e idiomas</h2>
 
-                <div class="field">
+                <div class="inputBx">
                     <label>Habilidades <span style="color:red">*</span></label>
                     <div class="chip-input">
                         <input type="text" id="habilidadesInput" placeholder="Ej: Asertivo, Gran nivel de liderazgo, Organizado + (Pulsa enter por cada habilidad)" maxlength="30">
@@ -121,7 +122,7 @@
 
                 </div>
 
-                <div class="field">
+                <div class="inputBx">
                     <label>Idiomas <span style="color:red">*</span></label>
                     <div class="chip-input">
                         <input type="text" id="idiomasInput" placeholder="Ej: Inglés avanzado, Español nativo + (Pulsa enter por cada Idioma)" maxlength="30">

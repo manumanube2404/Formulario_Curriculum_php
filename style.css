@@ -1,3 +1,5 @@
+/*FORMULARIO*/
+
 * {
     box-sizing: border-box;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
@@ -6,10 +8,20 @@
 body {
 
     margin: 0;
-    background: #0A0A0A;
+    background: #dcf1f0;
     color: #fff;
 }
 
+.overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0.85));
+}
+
+form{
+    z-index: 5;
+}
 .container {
     max-width: 1150px;
     margin: 100px auto;
@@ -78,6 +90,19 @@ h2 {
 
 .field.full {
     margin-top: 25px;
+}
+
+.inputBx input {
+  position: relative;
+  width: 100%;
+  padding: 12px 20px;
+  background: transparent;
+  border: 2px solid #fff;
+  border-radius: 40px;
+  font-size: 1.2em;
+  box-shadow: none;
+  outline: none;
+  color: white;
 }
 
 /* Actions */
